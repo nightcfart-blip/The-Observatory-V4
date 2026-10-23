@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050506">
+  <title>Watch Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main id="homePage" class="home-page">
+    <div id="compassWrap" class="compass-wrap">
+      <div id="compass" class="compass">
+
+        <svg viewBox="0 0 500 500"
+          class="compass-art" aria-hidden="true">
+          <defs>
+            <linearGradient id="compassGold"
+              x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fff0b1"/>
+              <stop offset="48%" stop-color="#dab66c"/>
+              <stop offset="100%" stop-color="#90632c"/>
+            </linearGradient>
+          </defs>
+
+          <circle cx="250" cy="250" r="180"
+            class="compass-ring outer"/>
+          <circle cx="250" cy="250" r="145"
+            class="compass-ring inner"/>
+
+          <g fill="url(#compassGold)">
+            <polygon points="250,38 265,250 250,250"/>
+            <polygon points="250,38 235,250 250,250"
+              opacity=".65"/>
+            <polygon points="462,250 250,265 250,250"/>
+            <polygon points="462,250 250,235 250,250"
+              opacity=".65"/>
+            <polygon points="250,462 235,250 250,250"/>
+            <polygon points="250,462 265,250 250,250"
+              opacity=".65"/>
+            <polygon points="38,250 250,235 250,250"/>
+            <polygon points="38,250 250,265 250,250"
+              opacity=".65"/>
+            <polygon points="157,157 250,250 217,183"/>
+            <polygon points="343,157 250,250 283,183"/>
+            <polygon points="343,343 250,250 283,317"/>
+            <polygon points="157,343 250,250 217,317"/>
+            <polygon points="157,157 183,217 250,250"
+              opacity=".5"/>
+            <polygon points="343,157 317,217 250,250"
+              opacity=".5"/>
+            <polygon points="343,343 317,283 250,250"
+              opacity=".5"/>
+            <polygon points="157,343 183,283 250,250"
+              opacity=".5"/>
+          </g>
+        </svg>
+
+        <button class="tip tip-top"
+          data-page="watchlist"
+          aria-label="Watchlist"></button>
+        <button class="tip tip-right"
+          data-page="creation"
+          aria-label="Creation"></button>
+        <button class="tip tip-bottom"
+          data-page="library"
+          aria-label="Library"></button>
+        <button class="tip tip-left"
+          data-page="statistics"
+          aria-label="Statistics"></button>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- WATCHLIST -->
+
+  <section id="watchlistPage" class="page">
+    <header class="page-header">
+      <button class="back-btn" data-back>‹</button>
+      <h1>Watchlist</h1>
+      <span class="header-spacer"></span>
+    </header>
+
+    <div class="page-content">
+      <form id="watchlistForm" class="subtle-card">
+        <input id="watchTitle" required
+          placeholder="Title">
+
+        <div class="two-fields">
+          <select id="watchMedium"></select>
+          <input id="watchRelease"
+            placeholder="Release / airing">
+        </div>
+
+        <button type="submit" class="gold-button">
+          Add to Watchlist
+        </button>
+      </form>
+
+      <div id="watchlistItems" class="watchlist-items"></div>
+    </div>
+  </section>
+
+  <!-- CREATION -->
+
+  <section id="creationPage" class="page">
+    <header class="page-header">
+      <button class="back-btn" data-back>‹</button>
+      <h1>Creation</h1>
+      <span class="header-spacer"></span>
+    </header>
+
+    <div class="page-content">
+      <div class="creation-list">
+        <button data-create="group">
+          <span>◇</span>Group<b>›</b>
+        </button>
+        <button data-create="production">
+          <span>✦</span>Production<b>›</b>
+        </button>
+        <button data-create="season">
+          <span>◈</span>Season<b>›</b>
+        </button>
+        <button data-create="episode">
+          <span>✧</span>Episode<b>›</b>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIBRARY -->
+
+  <section id="libraryPage" class="page">
+    <header class="page-header">
+      <button class="back-btn" data-back>‹</button>
+      <h1>Library</h1>
+      <button id="libraryAddBtn"
+        class="header-action" aria-label="Create">+</button>
+    </header>
+
+    <div class="page-content">
+      <div class="library-controls">
+        <input id="librarySearch" type="search"
+          placeholder="Search Library...">
+
+        <select id="librarySort">
+          <option value="newest">Newest added</option>
+          <option value="oldest">Eldest added</option>
+          <option value="az">Alphabetically A–Z</option>
+          <option value="za">Alphabetically Z–A</option>
+          <option value="medium">Media type</option>
+          <option value="ratingHigh">Highest rated</option>
+          <option value="ratingLow">Lowest rated</option>
+          <option value="releaseNew">Newest airing</option>
+          <option value="releaseOld">Oldest airing</option>
+          <option value="lengthTotalHigh">Length Total — Longest</option>
+          <option value="lengthTotalLow">Length Total — Shortest</option>
+          <option value="episodeCountHigh">Length Episodes — Most</option>
+          <option value="episodeCountLow">Length Episodes — Fewest</option>
+        </select>
+
+        <div class="library-filters">
+          <label>
+            <input type="checkbox" data-filter="group">
+            Groups
+          </label>
+          <label>
+            <input type="checkbox" data-filter="production"
+              checked>
+            Productions
+          </label>
+          <label>
+            <input type="checkbox" data-filter="season">
+            Seasons
+          </label>
+          <label>
+            <input type="checkbox" data-filter="episode">
+            Episodes
+          </label>
+        </div>
+      </div>
+
+      <div id="libraryCount" class="library-count"></div>
+      <div id="libraryItems" class="entry-list"></div>
+    </div>
+  </section>
+
+  <!-- STATISTICS -->
+
+  <section id="statisticsPage" class="page">
+    <header class="page-header">
+      <button class="back-btn" data-back>‹</button>
+      <h1>Statistics</h1>
+      <span class="header-spacer"></span>
+    </header>
+
+    <div class="page-content">
+
+      <div class="statistics-overview">
+        <div>
+          <span>Productions</span>
+          <strong id="statProductions">0</strong>
+        </div>
+
+        <button type="button" id="statTimeButton"
+          class="stat-total-button"
+          aria-expanded="false">
+          <span>Watch time</span>
+          <strong id="statWatchTime">0h 0m</strong>
+          <small id="statTimeUnit">Hours + Minutes</small>
+        </button>
+
+        <div>
+          <span>Average rating</span>
+          <strong id="statAverage">—</strong>
+        </div>
+      </div>
+
+      <div id="timeFormatPanel"
+        class="time-format-panel hidden">
+        <label for="timeFormat">Watch time display</label>
+        <select id="timeFormat">
+          <option value="minutes">Minutes only</option>
+          <option value="hours" selected>Hours and Minutes</option>
+          <option value="days">Days, Hours and Minutes</option>
+          <option value="months">Months, Days, Hours and Minutes</option>
+          <option value="year">% of Standard Year</option>
+          <option value="decade">% of Standard Decade</option>
+        </select>
+      </div>
+
+      <div class="stats-controls">
+
+        <div class="control-pair">
+          <label for="statMetric">Statistical data</label>
+          <select id="statMetric"></select>
+        </div>
+
+        <div id="granularityControl"
+          class="control-pair hidden">
+          <label for="statGranularity">Time interval</label>
+          <select id="statGranularity">
+            <option value="day">Daily</option>
+            <option value="week">Weekly</option>
+            <option value="month" selected>Monthly</option>
+            <option value="year">Yearly</option>
+          </select>
+        </div>
+
+        <div id="mediaModeControl"
+          class="control-pair hidden">
+          <label for="statMediaMode">Measure</label>
+          <select id="statMediaMode">
+            <option value="minutes">Total watched minutes</option>
+            <option value="count">Number of Productions</option>
+          </select>
+        </div>
+
+        <div id="genreModeControl"
+          class="control-pair hidden">
+          <label for="statGenreMode">Genres included</label>
+          <select id="statGenreMode">
+            <option value="main">Only Main Genres</option>
+            <option value="both" selected>
+              Main and Secondary Genres
+            </option>
+            <option value="secondary">Only Secondary Genres</option>
+          </select>
+        </div>
+
+        <div id="ratingLevelControl"
+          class="control-pair hidden">
+          <label for="statRatingLevel">Compare entries</label>
+          <select id="statRatingLevel">
+            <option value="group">Groups</option>
+            <option value="production" selected>Productions</option>
+            <option value="season">Seasons</option>
+            <option value="episode">Episodes</option>
+          </select>
+        </div>
+
+        <div class="control-pair">
+          <label for="statDiagram">Diagram</label>
+          <select id="statDiagram"></select>
+        </div>
+
+      </div>
+
+      <div class="chart-panel">
+        <div class="chart-heading">
+          <h2 id="chartTitle"></h2>
+          <span id="chartSubtitle"></span>
+        </div>
+
+        <div id="chartViewport" class="chart-viewport">
+          <div id="chartArea" class="chart-area"></div>
+        </div>
+
+        <div id="chartInspector"
+          class="chart-inspector hidden"></div>
+
+        <div id="chartDetailList"
+          class="chart-detail-list"></div>
+
+        <div id="chartFootnote"
+          class="stats-footnote"></div>
+      </div>
+
+      <div id="statExplanation"
+        class="stat-explanation"></div>
+
+    </div>
+  </section>
+
+  <!-- ENTRY DETAILS -->
+
+  <div id="detailOverlay" class="detail-overlay hidden">
+    <article class="detail-sheet">
+
+      <header class="detail-toolbar">
+        <button id="closeDetail">‹</button>
+        <span id="detailKind"></span>
+        <button id="editDetail">Edit</button>
+      </header>
+
+      <div class="detail-scroll">
+        <div id="detailBanner" class="detail-banner"></div>
+
+        <div class="detail-content">
+          <div class="detail-information">
+
+            <div class="detail-title-area">
+              <h2 id="detailTitle"></h2>
+              <div id="detailMedium"
+                class="detail-medium"></div>
+              <div id="detailStars"
+                class="detail-stars"></div>
+              <div id="detailRating"
+                class="detail-rating"></div>
+            </div>
+
+            <div class="detail-genres">
+              <div id="detailExtra"
+                class="detail-extra"></div>
+              <div id="detailMainGenres"
+                class="main-genres"></div>
+              <div id="detailSecondaryGenres"
+                class="secondary-genres"></div>
+            </div>
+
+          </div>
+
+          <div id="detailNotes"
+            class="detail-notes"></div>
+          <div id="detailChildren"
+            class="detail-children"></div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- ENTRY EDITOR -->
+
+  <div id="editorOverlay" class="modal-overlay hidden">
+    <div class="editor-modal">
+
+      <header class="modal-header">
+        <button id="cancelEditor">‹</button>
+        <h2 id="editorHeading">Create</h2>
+        <button id="saveEditor">✓</button>
+      </header>
+
+      <div class="editor-scroll">
+        <form id="editorForm">
+
+          <input type="hidden" id="editId">
+          <input type="hidden" id="editType">
+
+          <div class="editor-section">
+            <label>Banner image</label>
+            <div id="bannerPreview"
+              class="banner-preview">No banner</div>
+            <input id="bannerInput"
+              type="file" accept="image/*">
+            <button type="button"
+              id="removeBanner" class="small-action">
+              Remove banner
+            </button>
+          </div>
+
+          <div class="editor-section">
+            <label for="editTitle">Title</label>
+            <input id="editTitle" required
+              placeholder="Title">
+          </div>
+
+          <div id="mediumField" class="editor-section">
+            <label for="editMedium">Media type</label>
+            <select id="editMedium"></select>
+          </div>
+
+          <div id="parentField" class="editor-section">
+            <label id="parentLabel" for="editParent">Parent</label>
+            <select id="editParent"></select>
+          </div>
+
+          <div id="episodeNumberField"
+            class="editor-section">
+            <label for="editEpisodeNumber">Episode number</label>
+            <input id="editEpisodeNumber"
+              type="number" min="1" step="1">
+          </div>
+
+          <div id="airingField"
+            class="editor-section hidden">
+            <label for="editAiring">Time of Airing</label>
+            <input id="editAiring"
+              type="text"
+              placeholder="13.03.26 or July 2004">
+            <p class="field-hint">
+              Exact day, month and year, or year only.
+            </p>
+          </div>
+
+          <div id="watchingField"
+            class="editor-section hidden">
+            <label for="editWatching">Time of Watching</label>
+            <input id="editWatching"
+              type="text"
+              placeholder="13.03.26 or July 2004">
+            <p class="field-hint">
+              Exact dates support daily and weekly charts.
+              Month-only and year-only dates support broader charts.
+            </p>
+          </div>
+
+          <div class="editor-section">
+            <label for="editDuration">Duration in minutes</label>
+            <input id="editDuration"
+              type="number" min="0" step="1">
+          </div>
+
+          <div id="ratingField" class="editor-section">
+            <label>Rating</label>
+            <div id="starRating"
+              class="star-editor"></div>
+            <div class="rating-input-row">
+              <select id="editRating"></select>
+              <span>/ 10</span>
+            </div>
+          </div>
+
+          <div id="autoGenresField"
+            class="editor-section hidden">
+            <label>Inherited genres</label>
+            <div class="inherited-genres">
+              <div id="autoMainGenres"></div>
+              <small id="autoSecondaryGenres"></small>
+            </div>
+          </div>
+
+          <div id="manualGenresField">
+
+            <div class="editor-section">
+              <label for="editMainGenres">Main genres</label>
+              <input id="editMainGenres"
+                placeholder="Fantasy, Adventure">
+            </div>
+
+            <div class="editor-section">
+              <label for="editSecondaryGenres">
+                Secondary genres
+              </label>
+              <input id="editSecondaryGenres"
+                placeholder="Mystery, Romance">
+            </div>
+
+          </div>
+
+          <div class="editor-section">
+            <label for="editNotes">Personal opinion</label>
+            <textarea id="editNotes" rows="5"
+              placeholder="Your thoughts..."></textarea>
+          </div>
+
+          <button type="submit"
+            class="gold-button">Save</button>
+
+          <button type="button" id="deleteEntryBtn"
+            class="delete-button hidden">
+            Delete Entry
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
